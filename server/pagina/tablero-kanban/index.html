@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Control de Tareas</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header>
+    <h1>Control de Tareas</h1>
+    <nav>
+      <a href="index.html" class="active">Tablero</a>
+      <a href="completados.html">Completados</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="add-task-bar">
+      <input type="text" id="newTaskInput" placeholder="Escribe una nueva tarea...">
+      <select id="columnSelect">
+        <option value="pendiente">Pendiente</option>
+        <option value="trabajando">Trabajando</option>
+        <option value="porconfirmar">Por Confirmar</option>
+      </select>
+      <button id="addTaskBtn">Añadir Tarea</button>
+      <button id="reuseBtn" class="btn-outline">Reutilizar</button>
+    </div>
+
+    <div id="reuseModal" class="modal-overlay hidden">
+      <div class="modal-box">
+        <div class="modal-header">
+          <h2>Reutilizar tareas completadas</h2>
+          <button id="closeReuseModal" class="modal-close">&times;</button>
+        </div>
+        <div class="modal-body" id="reuseBody"></div>
+        <div class="modal-footer">
+          <button id="confirmReuseBtn" class="btn-confirm">Añadir seleccionadas</button>
+          <button id="cancelReuseBtn" class="btn-cancel">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="board">
+      <div class="column" data-column="pendiente">
+        <div class="column-header">
+          <h2>Pendiente</h2>
+          <span class="task-count">0</span>
+        </div>
+        <div class="column-body"></div>
+      </div>
+      <div class="column" data-column="trabajando">
+        <div class="column-header">
+          <h2>Trabajando</h2>
+          <span class="task-count">0</span>
+        </div>
+        <div class="column-body"></div>
+      </div>
+      <div class="column" data-column="porconfirmar">
+        <div class="column-header">
+          <h2>Por Confirmar</h2>
+          <span class="task-count">0</span>
+        </div>
+        <div class="column-body"></div>
+      </div>
+    </div>
+  </main>
+
+  <div id="debugLog" style="position:fixed;bottom:0;left:0;right:0;max-height:200px;overflow:auto;background:#1a1a2e;color:#0f0;font:12px monospace;padding:8px;z-index:9999;display:none;"></div>
+  <script>
+    document.getElementById('debugLog').style.display = 'block';
+  </script>
+  <script src="js/script.js"></script>
+</body>
+</html>

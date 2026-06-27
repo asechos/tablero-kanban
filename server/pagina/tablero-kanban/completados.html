@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tareas Completadas</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header>
+    <h1>Tareas Completadas</h1>
+    <nav>
+      <a href="index.html">Tablero</a>
+      <a href="completados.html" class="active">Completados</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="completed-toolbar">
+      <div class="month-selector">
+        <label for="monthSelect">Mes:</label>
+        <select id="monthSelect"></select>
+      </div>
+      <div class="toolbar-actions">
+        <button id="exportMonthBtn" class="btn-outline">Exportar mes</button>
+        <button id="importBtn" class="btn-outline">Importar</button>
+        <input type="file" id="importFileInput" accept=".json" hidden>
+        <button id="clearCompletedBtn" class="btn-danger">Limpiar Todo</button>
+      </div>
+    </div>
+    <div class="month-summary" id="monthSummary"></div>
+    <div class="completed-list"></div>
+    <div class="empty-message">No hay tareas completadas aun.</div>
+  </main>
+
+  <div id="debugLog" style="position:fixed;bottom:0;left:0;right:0;max-height:200px;overflow:auto;background:#1a1a2e;color:#0f0;font:12px monospace;padding:8px;z-index:9999;display:none;"></div>
+  <script>
+    document.getElementById('debugLog').style.display = 'block';
+  </script>
+  <script src="js/script.js"></script>
+</body>
+</html>

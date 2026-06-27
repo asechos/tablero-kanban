@@ -1,0 +1,8 @@
+{
+  "name": "tablero-kanban",
+  "version": "1.0.0",
+  "description": "Tablero Kanban interactivo con arrastrar y soltar",
+  "scripts": {
+    "start": "node server.js"
+  }
+}
