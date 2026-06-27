@@ -54,25 +54,21 @@ En la misma red local usa la IP del servidor:
 http://192.168.1.100:7000
 ```
 
-### Exponer con túnel HTTPS público (gratuito)
+### Exponer con GitHub Codespaces
 
-Para acceder desde cualquier lugar sin IP fija ni configurar router:
+Este proyecto está hosteado en GitHub y se puede ejecutar en **Codespaces** con URLs públicas automáticas:
 
-```bash
-# Descargar cloudflared
-curl -L https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 -o cloudflared
-chmod +x cloudflared
+1. Abre el repo: `https://github.com/asechos/tablero-kanban`
+2. Presiona `.` (punto) o ve a **Code → Create codespace**
+3. Inicia la app: `node server/pagina/tablero-kanban/server.js`
+4. Codespaces expone el puerto automáticamente
 
-# Iniciar el servidor primero (si no está corriendo)
-node server.js &
+**URLs públicas del codespace:**
 
-# Crear túnel
-./cloudflared tunnel --url http://127.0.0.1:7000
-```
+- App Kanban → `https://<codespace>-7000.app.github.dev`
+- code-server → `https://<codespace>-8443.app.github.dev`
 
-Te dará una URL como: `https://xxx.trycloudflare.com`
-
-El túnel es **gratuito, sin registro, sin tarjeta de crédito**. La URL cambia cada vez que lo reinicias. No usar en producción.
+Cada puerto abierto genera su propia URL. Las URLs son fijas mientras no elimines el codespace.
 
 ## Funcionalidades
 
@@ -174,64 +170,4 @@ Si ves errores como `fetchBoard status 404`, es porque el proyecto está detrás
 
 Para ver errores más detallados, abre la consola del navegador (`F12 → Console`).
 
-## GitHub + code-server
-
-code-server **ya incluye Git integrado**. No necesitas instalar nada extra.
-
-### Panel de Control de Código Fuente
-
-A la izquierda de code-server hay un icono de Git (rama). Ahí puedes:
-
-- Ver archivos modificados
-- Hacer `git add` (el `+` en cada archivo)
-- Escribir mensaje de commit y presionar `Ctrl+Enter`
-- Sincronizar (push/pull) con GitHub
-
-### Terminal
-
-Abre la terminal integrada (`Ctrl+Ñ` o `Ctrl+J`) y usa Git normalmente:
-
-```bash
-# Configurar tu cuenta (solo la primera vez)
-git config --global user.name "Tu Nombre"
-git config --global user.email "tu@email.com"
-
-# Clonar un repo existente
-git clone https://github.com/tu-usuario/mi-repo.git
-
-# O iniciar uno nuevo desde el proyecto actual
-cd tablero-kanban
-git init
-git add .
-git commit -m "Primer commit"
-
-# Conectar con GitHub (crea el repo vacío en GitHub primero)
-git remote add origin https://github.com/tu-usuario/tablero-kanban.git
-git push -u origin main
-```
-
-### Autenticación con GitHub
-
-1. **Token personal (recomendado):**
-   - Ve a GitHub → Settings → Developer settings → Personal access tokens
-   - Crea un token con permisos `repo`
-   - En la terminal usa el token como contraseña al hacer push
-
-2. **GitHub CLI (`gh`):**
-   ```bash
-   gh auth login
-   gh repo create tablero-kanban --public --source=. --push
-   ```
-
-3. **code-server tunnel** (solo expone el editor VS Code, NO la app):
-   ```bash
-   export PATH=$PATH:/app/code-server/bin
-   code-server tunnel
-   ```
-   - Sirve para acceder a code-server desde cualquier lugar
-   - No expone tu app del puerto 7000 — solo el editor de código
-   - Para exponer la app, usa **Cloudflare Tunnel** (ver sección "Exponer con túnel")
-
-### GitHub Codespaces (alternativa en la nube)
-
-Si subes el proyecto a GitHub, puedes abrirlo directamente en un Codespace usando `https://github.dev/tu-usuario/tablero-kanban` — es como code-server pero en los servidores de GitHub, sin necesidad de tener tu propio servidor.
+## GitHub + Codespaces
